@@ -1,0 +1,263 @@
+# ---------------------------------------------------------------------------
+!if !$d(BCB)
+BCB = $(MAKEDIR)\..
+!endif
+
+# ---------------------------------------------------------------------------
+# IDE SECTION
+# ---------------------------------------------------------------------------
+# The following section of the project makefile is managed by the BCB IDE.
+# It is recommended to use the IDE to change any of the values in this
+# section.
+# ---------------------------------------------------------------------------
+
+VERSION = BCB.03
+# ---------------------------------------------------------------------------
+PROJECT = RascalBoy.exe
+OBJFILES = RascalBoy.obj EMU\opcodes.obj EMU\topcodes.obj EMU\memory.obj emu\gbaemu.obj \
+  EMU\exec.obj gfx\mode3.obj gfx\mode4.obj gfx\mode5.obj gfx\modeTile.obj \
+  EMU\cpu.obj EMU\graphics.obj emu\ttables.obj EMU\io.obj emu\opedec.obj \
+  emu\tables.obj sound.obj EMU\bios.obj EMU\sprite.obj debug.obj lcd.obj list.obj \
+  lstring.obj input.obj emu\topedec.obj emu\DebSprite.obj debmem.obj debpal.obj \
+  debug1.obj debpalobj.obj trad.obj lregkey.obj inputtext.obj about.obj \
+  fstream.obj EMU\debbkg.obj source.obj winedit.obj brkmem.obj audioplug.obj \
+  videoplug.obj plugin.obj sio.obj propplug.obj pluginctn.obj zip\zipfile.obj \
+  savestate.obj dragdrop.obj Unit1.obj linkcontrol.obj cheat.obj EMU\rtc.obj \
+  service.obj guidService.obj backplug.obj
+RESFILES = gba.res message.res
+RESDEPEN = $(RESFILES)
+LIBFILES =
+LIBRARIES = VCLX35.lib bcbsmp35.lib VCL35.lib
+SPARELIBS = VCL35.lib bcbsmp35.lib VCLX35.lib
+PACKAGES = VCLX35.bpi VCL35.bpi VCLDB35.bpi VCLDBX35.bpi bcbsmp35.bpi dclocx35.bpi \
+  QRPT35.bpi
+DEFFILE =
+# ---------------------------------------------------------------------------
+PATHCPP = .;EMU;gfx;zip
+PATHASM = .;
+PATHRC = .;
+PATHPAS = .;
+DEBUGLIBPATH = $(BCB)\lib\debug
+RELEASELIBPATH = $(BCB)\lib\release
+# ---------------------------------------------------------------------------
+CFLAG1 = -Od -w -r- -d -k -y -v -vi- -w-par -c -tW
+CFLAG2 = -D_NO_VCL;_DEBUG;STRICT;_WIN32_WCE;_DEBPRO \
+  -Ic:\programmi\borland\cbuilder3\projects;zip;gfx;emu;c:\mssdk\include;C:\WMSDK\WMFSDK9\include;$(BCB)\include;.;c:\zlib;C:\lpng125
+CFLAG3 = -Tkh30000 -6 -w-hid
+PFLAGS = -D_NO_VCL;_DEBUG;STRICT;_WIN32_WCE;_DEBPRO \
+  -Uc:\programmi\borland\cbuilder3\projects;zip;gfx;emu;$(BCB)\lib;C:\zlib\contrib\delphi2;C:\WMSDK\WMFSDK9\lib;$(RELEASELIBPATH) \
+  -Ic:\programmi\borland\cbuilder3\projects;zip;gfx;emu;c:\mssdk\include;C:\WMSDK\WMFSDK9\include;$(BCB)\include;.;c:\zlib;C:\lpng125 \
+  -$Y -$W -$O- -v -JPHN -M
+RFLAGS = -D_NO_VCL;_DEBUG;STRICT;_WIN32_WCE;_DEBPRO \
+  -ic:\programmi\borland\cbuilder3\projects;zip;gfx;emu;c:\mssdk\include;C:\WMSDK\WMFSDK9\include;$(BCB)\include;.;c:\zlib;C:\lpng125
+AFLAGS = /ic:\programmi\borland\cbuilder3\projects /izip /igfx /iemu /ic:\mssdk\include \
+  /iC:\WMSDK\WMFSDK9\include /i$(BCB)\include /i. /ic:\zlib /iC:\lpng125 \
+  /d_NO_VCL /d_DEBUG /dSTRICT /d_WIN32_WCE /d_DEBPRO /mx /w2 /zn
+LFLAGS = -Lc:\programmi\borland\cbuilder3\projects;zip;gfx;emu;$(BCB)\lib;C:\zlib\contrib\delphi2;C:\WMSDK\WMFSDK9\lib;$(RELEASELIBPATH) \
+  -aa -Tpe -x -Gn -w-dup -v -r
+IFLAGS =
+# ---------------------------------------------------------------------------
+ALLOBJ = c0w32.obj $(OBJFILES)
+ALLRES = $(RESFILES)
+ALLLIB = $(LIBFILES) import32.lib cw32mt.lib
+# ---------------------------------------------------------------------------
+!ifdef IDEOPTIONS
+
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=1
+Special=0
+Private=0
+DLL=0
+Locale=1040
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=Lino Maglione
+FileDescription=RascalBoy
+FileVersion=1.0.0.0
+InternalName=RascalBoy
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=RascalBoy.exe
+ProductName=RascalBoy
+ProductVersion=1.0.0.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=26
+Item0=c:\programmi\borland\cbuilder3\projects;zip;gfx;emu;c:\mssdk\include;C:\WMSDK\WMFSDK9\include;$(BCB)\include;.;c:\zlib;C:\lpng125
+Item1=zip;gfx;emu;c:\mssdk\include;C:\WMSDK\WMFSDK9\include;$(BCB)\include;.;c:\zlib;C:\lpng125
+Item2=zip;gfx;emu;c:\mssdk\include;C:\WMSDK\WMFSDK9\include;$(BCB)\include;.;c:\zlib
+Item3=c:\programmi\borland\cbuilder3\projects;zip;gfx;emu;c:\mssdk\include;C:\WMSDK\WMFSDK9\include;$(BCB)\include;.;c:\zlib
+Item4=gfx;emu;c:\mssdk\include;C:\WMSDK\WMFSDK9\include;$(BCB)\include;.;c:\zlib
+Item5=c:\programmi\borland\cbuilder3\projects;gfx;emu;c:\mssdk\include;C:\WMSDK\WMFSDK9\include;$(BCB)\include;.;c:\zlib
+Item6=gfx;c:\programmi\borland\cbuilder3\projects;emu;c:\mssdk\include;C:\WMSDK\WMFSDK9\include;$(BCB)\include;.;c:\zlib
+Item7=emu;c:\mssdk\include;C:\WMSDK\WMFSDK9\include;$(BCB)\include;.;c:\zlib
+Item8=c:\programmi\borland\cbuilder3\projects;emu;c:\mssdk\include;C:\WMSDK\WMFSDK9\include;$(BCB)\include;.;c:\zlib
+Item9=emu;c:\mssdk\include;$(BCB)\include;.;c:\zlib;C:\WMSDK\WMFSDK9\include
+Item10=emu;$(BCB)\include;.;c:\zlib;C:\WMSDK\WMFSDK9\include
+Item11=emu;$(BCB)\include;.;c:\zlib
+Item12=emu;$(BCB)\include;.
+Item13=c:\programmi\borland\cbuilder3\projects;emu;$(BCB)\include;.
+Item14=$(BCB)\include;emu;.
+Item15=$(BCB)\include;.;emu
+Item16=.;$(BCB)\include;emu
+Item17=emu;.;$(BCB)\include
+Item18=emu;.;$(BCB)\include;c:\bcc\include
+Item19=emu;.;c:\bcc\include;$(BCB)\include
+Item20=new;..\..\..\..\programmi\borland\cbuilder3\projects;emu;$(BCB)\include;.
+Item21=..\..\..\..\programmi\borland\cbuilder3\projects;..\..\..\programmi\borland\cbuilder3\projects;emu;$(BCB)\include;.
+Item22=..\..\..\programmi\borland\cbuilder3\projects;emu;$(BCB)\include;.
+Item23=emu;\mssdk\include;$(BCB)\include;.
+Item24=..\dll;..\..\..\programmi\borland\cbuilder3\projects;emu;$(BCB)\include
+Item25=emu;$(BCB)\include
+
+[HistoryLists\hlLibraryPath]
+Count=23
+Item0=c:\programmi\borland\cbuilder3\projects;zip;gfx;emu;$(BCB)\lib;C:\zlib\contrib\delphi2;C:\WMSDK\WMFSDK9\lib
+Item1=zip;gfx;emu;$(BCB)\lib;C:\zlib\contrib\delphi2;C:\WMSDK\WMFSDK9\lib
+Item2=zip;gfx;emu;$(BCB)\lib;C:\zlib;C:\WMSDK\WMFSDK9\lib
+Item3=c:\programmi\borland\cbuilder3\projects;zip;gfx;emu;$(BCB)\lib;c:\zlib;C:\WMSDK\WMFSDK9\lib
+Item4=gfx;emu;$(BCB)\lib;c:\zlib;C:\WMSDK\WMFSDK9\lib
+Item5=c:\programmi\borland\cbuilder3\projects;gfx;emu;$(BCB)\lib;c:\zlib;C:\WMSDK\WMFSDK9\lib
+Item6=gfx;c:\programmi\borland\cbuilder3\projects;emu;$(BCB)\lib;c:\zlib;C:\WMSDK\WMFSDK9\lib
+Item7=emu;$(BCB)\lib;c:\zlib;C:\WMSDK\WMFSDK9\lib
+Item8=c:\programmi\borland\cbuilder3\projects;emu;$(BCB)\lib;c:\zlib;C:\WMSDK\WMFSDK9\lib
+Item9=emu;$(BCB)\lib;c:\zlib
+Item10=emu;$(BCB)\lib
+Item11=c:\programmi\borland\cbuilder3\projects;emu;$(BCB)\lib
+Item12=c:\programmi\borland\cbuilder3\projects;emu;.\emu;$(BCB)\lib
+Item13=emu;.\emu;$(BCB)\lib
+Item14=emu;.\emu;$(BCB)\lib;c:\bcc\lib
+Item15=new;..\..\..\..\programmi\borland\cbuilder3\projects;emu;.\emu;$(BCB)\lib
+Item16=.\emu;$(BCB)\lib
+Item17=..\..\..\..\programmi\borland\cbuilder3\projects;..\..\..\programmi\borland\cbuilder3\projects;emu;.\emu;$(BCB)\lib
+Item18=..\..\..\programmi\borland\cbuilder3\projects;emu;.\emu;$(BCB)\lib
+Item19=emu;.\emu;\mssdk\lib;$(BCB)\lib
+Item20=emu;.\emu;$(BCB)\lib;\elogba\source\gba\emu
+Item21=.\emu;$(BCB)\lib;\elogba\source\gba\emu
+Item22=..\dll;..\..\..\programmi\borland\cbuilder3\projects;emu;$(BCB)\lib
+
+[HistoryLists\hlConditionals]
+Count=9
+Item0=_NO_VCL;_DEBUG;STRICT;_WIN32_WCE;_DEBPRO
+Item1=_NO_VCL;_DEBUG;STRICT;_WIN32_WCE
+Item2=_NO_VCL;_DEBUG;STRICT
+Item3=_NO_VCL;_DEBUG;_DEBPRO;STRICT
+Item4=_NO_VCL;_DEBUG;_DEBPRO
+Item5=_NO_VCL;_DEBUG;STRICT;_IPSPATCH
+Item6=_NO_VCL;_DEBUG
+Item7=_NO_VCL;_MMX;_DEBUG
+Item8=_NO_VCL;_MMX;_DEBUG;_DEBPRO
+
+[HistoryLists\hlRunParameters]
+Count=17
+Item0=-accessbios
+Item1=-nogbcsound
+Item2=-nortc
+Item3=-cazzo e:\gba\rom\www.game711.com 1104 - Pokemon - Versione Rubino (I).gba
+Item4=-cazzo e:\gba\rom\www.game711.com 1104 - Pokemon - Versione Rubino (I).gba -cazzo
+Item5=e:\gba\rom\www.game711.com 1104 - Pokemon - Versione Rubino (I).gba
+Item6=f:\rascalboy.exe -cazzo e:\gba\rom\www.game711.com 1104 - Pokemon - Versione Rubino (I).gba
+Item7= -resampleMIX
+Item8=-nogbcsound -resamplemix
+Item9=e:\gba\rom\031.gba
+Item10=e:\gba\rom\0048 - Kuru Kuru Kururin (E).gba
+Item11=e:\gba\zip\0733.zip -resamplemix
+Item12=e:\gba\zip\0733.zip
+Item13=-resamplemix -lino e:\gba\zip\0733.zip
+Item14=e:\gba\zip\733.zip
+Item15=-resamplemix e:\gba\rom\733.zip
+Item16=e:\gba\rom\733.zip
+
+[Debugging]
+DebugSourceDirs=
+
+[Parameters]
+RunParams=-accessbios
+HostApplication=
+
+!endif
+
+# ---------------------------------------------------------------------------
+# MAKE SECTION
+# ---------------------------------------------------------------------------
+# This section of the project file is not used by the BCB IDE.  It is for
+# the benefit of building from the command-line using the MAKE utility.
+# ---------------------------------------------------------------------------
+
+.autodepend
+# ---------------------------------------------------------------------------
+!if !$d(BCC32)
+BCC32 = bcc32
+!endif
+
+!if !$d(DCC32)
+DCC32 = dcc32
+!endif
+
+!if !$d(TASM32)
+TASM32 = tasm32
+!endif
+
+!if !$d(LINKER)
+LINKER = ilink32
+!endif
+
+!if !$d(BRCC32)
+BRCC32 = brcc32
+!endif
+# ---------------------------------------------------------------------------
+!if $d(PATHCPP)
+.PATH.CPP = $(PATHCPP)
+.PATH.C   = $(PATHCPP)
+!endif
+
+!if $d(PATHPAS)
+.PATH.PAS = $(PATHPAS)
+!endif
+
+!if $d(PATHASM)
+.PATH.ASM = $(PATHASM);emu
+!endif
+
+!if $d(PATHRC)
+.PATH.RC  = $(PATHRC)
+!endif
+# ---------------------------------------------------------------------------
+$(PROJECT): $(OBJFILES) $(RESDEPEN) $(DEFFILE)
+    $(BCB)\BIN\$(LINKER) @&&!
+    $(LFLAGS) +
+    $(ALLOBJ), +
+    $(PROJECT),, +
+    $(ALLLIB), +
+    $(DEFFILE), +
+    $(ALLRES)
+!
+# ---------------------------------------------------------------------------
+
+.pas.hpp:
+    $(BCB)\BIN\$(DCC32) $(PFLAGS) {$< }
+
+.pas.obj:
+    $(BCB)\BIN\$(DCC32) $(PFLAGS) {$< }
+
+.cpp.obj:
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) $(CFLAG2) $(CFLAG3) -n$(@D) {$< }
+
+.c.obj:
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) $(CFLAG2) $(CFLAG3) -n$(@D) {$< }
+
+.asm.obj:
+    $(BCB)\BIN\$(TASM32) $(ASFLAG) {$< }
+
+.rc.res:
+    $(BCB)\BIN\$(BRCC32) $(RFLAGS) -fo$@ $<
+# ---------------------------------------------------------------------------

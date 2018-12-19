@@ -1,0 +1,881 @@
+#include <windows.h>
+#include <winver.h>
+#include "resource.h"
+
+IDR_MAINFRAME ACCELERATORS
+BEGIN
+    "L", ID_APP_LOAD,                          VIRTKEY, CONTROL NOINVERT
+    "R", ID_EMU_START,                         VIRTKEY, CONTROL NOINVERT
+    "R", ID_EMU_RESET,                         VIRTKEY, ALT NOINVERT
+    "P", ID_EMU_PAUSE,                         VIRTKEY, CONTROL NOINVERT
+    "P", ID_SET_PROPERTY,                      VIRTKEY, ALT NOINVERT    
+    "S", ID_DEBUG_SAVE,                        VIRTKEY, CONTROL NOINVERT
+    "S", ID_SKIP_SYNCRO,                       VIRTKEY, ALT NOINVERT
+    VK_RETURN, ID_FRAMEBUFFER_DDRAWFULLSCREEN, VIRTKEY, ALT NOINVERT
+    "O", ID_DEBUG_LOAD,                        VIRTKEY, CONTROL NOINVERT
+    VK_F3, ID_DEBUG_REDRAW,                    VIRTKEY, NOINVERT
+    VK_F2, ID_DEBUG_MESSAGE,                   VIRTKEY, NOINVERT
+    VK_F2, ID_DEBUG_DIS3,                      VIRTKEY, ALT NOINVERT
+    VK_F6, ID_DEBUG_DIS,                       VIRTKEY, NOINVERT
+    "M", ID_SOUND,                             VIRTKEY, CONTROL NOINVERT
+    "1", ID_ZOOM_1,                            VIRTKEY, ALT NOINVERT
+    "2", ID_ZOOM_2,                            VIRTKEY, ALT NOINVERT
+    "3", ID_ZOOM_3,                            VIRTKEY, ALT NOINVERT
+    "N", ID_SKIP_0FRAME,                       VIRTKEY, SHIFT ALT NOINVERT
+    "1", ID_SKIP_1FRAME,                       VIRTKEY, SHIFT ALT NOINVERT
+    "2", ID_SKIP_2FRAME,                       VIRTKEY, SHIFT ALT NOINVERT
+    "3", ID_SKIP_3FRAME,                       VIRTKEY, SHIFT ALT NOINVERT
+    "4", ID_SKIP_4FRAME,                       VIRTKEY, SHIFT ALT NOINVERT
+    "G", ID_SOUND_SAVE,                        VIRTKEY, CONTROL NOINVERT
+    VK_F10,ID_FILE_STATE_SAVE,                 VIRTKEY, NOINVERT
+    VK_F10,ID_FILE_STATE_RECORDGAME,           VIRTKEY, SHIFT NOINVERT
+END
+
+IDR_MAINFRAME MENU
+BEGIN
+    POPUP " "
+        BEGIN
+        POPUP " "
+           BEGIN
+               MENUITEM " " ,    		                ID_APP_LOAD
+               MENUITEM " " ,                          ID_EMU_AUTOSTART
+               MENUITEM SEPARATOR
+               MENUITEM " ",                           ID_APP_IPSPATCH
+           END
+        POPUP " "
+           BEGIN
+               MENUITEM " ",                           ID_APP_RESETBIOS
+               MENUITEM SEPARATOR
+               MENUITEM " ",             				ID_APP_BIOS
+               MENUITEM " ",                           ID_APP_USEBIOS
+               MENUITEM SEPARATOR
+               MENUITEM " ",                           ID_SKIPBIOSINTRO
+           END
+        POPUP " "
+           BEGIN
+               MENUITEM " ",                           ID_FILE_STATE_RESET,GRAYED
+               MENUITEM SEPARATOR
+               MENUITEM " ",                           ID_FILE_STATE_AUTOLOADMOSTRCNT
+               MENUITEM " ",                           ID_FILE_STATE_SAVE,GRAYED
+               MENUITEM SEPARATOR
+               MENUITEM " ",                           ID_FILE_STATE_RECORDGAME
+               MENUITEM " ",                           ID_FILE_STATE_REWINDGAME,GRAYED
+               MENUITEM SEPARATOR
+               POPUP " ",GRAYED
+                   BEGIN
+                       MENUITEM SEPARATOR
+                   END
+               POPUP " ",GRAYED
+                   BEGIN
+                       MENUITEM SEPARATOR
+                   END
+           END
+        POPUP " "
+           BEGIN
+               MENUITEM " ",                           ID_FILE_CHEAT_AUTOLOAD
+               MENUITEM " ",                           ID_FILE_CHEAT_DISABLED
+               MENUITEM SEPARATOR
+               MENUITEM " ",                           ID_FILE_CHEAT_LOAD
+               MENUITEM " ",                           ID_FILE_CHEAT_LIST
+           END
+        POPUP " "
+           BEGIN
+               MENUITEM " ",       				    ID_EMU_START, GRAYED
+               MENUITEM " ",       				    ID_EMU_PAUSE, GRAYED
+               MENUITEM " ",                 	        ID_EMU_RESET, GRAYED
+           END
+       MENUITEM SEPARATOR
+       MENUITEM " ",                                   ID_SET_PROPERTY
+       MENUITEM SEPARATOR
+       POPUP "Language"
+           BEGIN
+               MENUITEM SEPARATOR
+           END
+       POPUP " "
+           BEGIN
+               MENUITEM " ",                           ID_FILE_RESET
+           END
+       MENUITEM SEPARATOR
+       POPUP " "
+       	BEGIN
+           	MENUITEM SEPARATOR
+           END
+       MENUITEM SEPARATOR
+       MENUITEM " ",                  		            ID_APP_EXIT
+       END
+    POPUP " "
+       BEGIN
+           MENUITEM " ", 						        ID_DEBUG_DIS
+        END
+    POPUP " "
+        BEGIN
+        POPUP " "
+            BEGIN
+            MENUITEM " ", 			                    ID_SKIP_0FRAME, CHECKED
+            MENUITEM " ", 		                        ID_SKIP_1FRAME
+            MENUITEM " ", 		                        ID_SKIP_2FRAME
+            MENUITEM " ", 		                        ID_SKIP_3FRAME
+            MENUITEM " ", 		                        ID_SKIP_4FRAME
+            MENUITEM SEPARATOR
+            POPUP " "
+               BEGIN
+                   MENUITEM " ", 			            ID_SKIP_CPU25
+                   MENUITEM " ", 			            ID_SKIP_CPU50
+                   MENUITEM " ",                       ID_SKIP_CPU75
+               END
+            MENUITEM SEPARATOR
+            MENUITEM " ",                              ID_SKIP_SYNCRO
+//            MENUITEM SEPARATOR
+//            MENUITEM "a", 					ID_SKIP_AUTO
+            END
+        POPUP " "
+           BEGIN
+               POPUP " "
+                   BEGIN
+                       MENUITEM "Sanyo or SST\t512KBits",				ID_SRAM_SST64K
+                       MENUITEM "Atmel\t512KBits",					    ID_SRAM_ATMEL64K
+                       MENUITEM "Macronix\t512KBits",					ID_SRAM_MACRO64K
+                       MENUITEM "Panasonic\t512KBits",					ID_SRAM_PANASONIC64K
+                   END
+               POPUP " "
+                   BEGIN
+                       MENUITEM "Macronix\t1MBits",					ID_SRAM_MACRO128K
+                       MENUITEM "Sanyo\t1MBits",                       ID_SDRAM_SANYO128K
+                       MENUITEM "Sanyo or SST\t1MBits",		        ID_SRAM_SST128K
+                   END
+               POPUP "EEPROM"
+                   BEGIN
+                       MENUITEM "EEPROM\t32K",                          ID_EEPROM_32K
+                       MENUITEM "EEPROM\t128K",                         ID_EEPROM_128K
+                   END
+           END
+        MENUITEM " ", 				                                    ID_KEY_CONFIG
+        POPUP " "
+           BEGIN
+               MENUITEM SEPARATOR
+           END
+        MENUITEM SEPARATOR
+        MENUITEM " ", 				                    ID_SOUND, CHECKED
+        POPUP " "
+            BEGIN
+            MENUITEM " ",                              ID_SOUND_ALL
+            MENUITEM SEPARATOR
+            MENUITEM " ", 					            ID_SOUND_FIFOA, CHECKED
+            MENUITEM " ", 					            ID_SOUND_FIFOB, CHECKED
+            MENUITEM SEPARATOR
+            MENUITEM " ", 					            ID_SOUND_GBC1, CHECKED
+            MENUITEM " ", 					            ID_SOUND_GBC2, CHECKED
+            MENUITEM " ", 					            ID_SOUND_GBC3, CHECKED
+            MENUITEM " ", 					            ID_SOUND_GBC4, CHECKED
+            END
+        POPUP " "
+           BEGIN
+               MENUITEM SEPARATOR
+           END
+        MENUITEM " ",							        ID_SOUND_SAVE
+        MENUITEM SEPARATOR
+        POPUP " "
+           BEGIN
+               MENUITEM " ", 					        ID_ZOOM_1, CHECKED
+               MENUITEM " ", 					        ID_ZOOM_2
+               MENUITEM " ", 					        ID_ZOOM_3
+            END
+        POPUP " "
+            BEGIN
+               MENUITEM " ",                           ID_FRAMEBUFFER_GDI, CHECKED
+               MENUITEM " ", 			                ID_FRAMEBUFFER_DDRAW
+               MENUITEM " ",                           ID_FRAMEBUFFER_DDRAWFULLSCREEN
+            END
+        POPUP " "
+           BEGIN
+               MENUITEM SEPARATOR
+           END
+        POPUP " "
+           BEGIN
+               MENUITEM " ",                           ID_LAYER_ALL
+               MENUITEM SEPARATOR
+               MENUITEM " ",                           ID_LAYER_0,CHECKED
+               MENUITEM " ",                           ID_LAYER_1,CHECKED
+               MENUITEM " ",                           ID_LAYER_2,CHECKED
+               MENUITEM " ",                           ID_LAYER_3,CHECKED
+               MENUITEM SEPARATOR
+               MENUITEM " ",                           ID_LAYER_OBJ,CHECKED
+               MENUITEM SEPARATOR
+               MENUITEM " ",                           ID_LAYER_WIN0,CHECKED
+               MENUITEM " ",                           ID_LAYER_WIN1,CHECKED
+           END
+       MENUITEM " ",                                  ID_BRIGHTNESS
+   END
+
+    POPUP " "
+        BEGIN
+           MENUITEM " ", 							        ID_HELP_ABOUT
+        END
+END
+
+IDR_CHEAT MENU
+BEGIN
+   POPUP " "
+   BEGIN
+       MENUITEM " ",                                   ID_CHEAT_NEW_CODEBREAKER
+       MENUITEM " ",                                   ID_CHEAT_NEW_GAMESHARK
+       MENUITEM SEPARATOR
+       MENUITEM " ",                                   ID_CHEAT_DELETE,GRAYED
+       MENUITEM " ",                                   ID_CHEAT_DELETE_ALL,GRAYED
+       MENUITEM SEPARATOR
+       MENUITEM " ",                                   ID_FILE_CHEAT_LOAD
+       MENUITEM " ",                                   ID_FILE_CHEAT_SAVE,GRAYED
+   END
+END
+
+#ifdef _DEBUG
+
+IDR_ASSEMBLER MENU
+BEGIN
+    POPUP ""
+        BEGIN
+        MENUITEM " ", 					                ID_ASSEMBLER_COPY
+#ifdef _DEBPRO
+        MENUITEM SEPARATOR
+        MENUITEM "Inserisci Subroutine", 		        ID_ASSEMBLER_PROCEDURE
+#endif
+        END
+END
+
+IDR_MEMORY MENU
+BEGIN
+   POPUP " "
+       BEGIN
+           MENUITEM " ",                               ID_MEMORY_LOAD
+           MENUITEM " ",                               ID_MEMORY_SAVE
+#ifdef _DEBPRO
+           MENUITEM "Azzera",                          ID_MEMORY_FILLZERO
+           MENUITEM "Seleziona tutto"                  ID_MEMORY_SELECTALL
+           MENUITEM SEPARATOR
+           MENUITEM "Copia"                            ID_MEMORY_COPY
+           MENUITEM "Incolla"                          ID_MEMORY_PASTE
+#endif
+           MENUITEM SEPARATOR
+           MENUITEM " ",                               ID_MEMORY_RESET,GRAYED
+       END
+
+END
+#ifdef _DEBPRO
+IDR_PROCEDURE MENU
+BEGIN
+    POPUP ""
+        BEGIN
+        MENUITEM "Nuovo", 						        ID_PROCEDURE_NEW
+        MENUITEM SEPARATOR
+        MENUITEM "Cancella", 					        ID_PROCEDURE_DEL
+        MENUITEM "Modifica", 					        ID_PROCEDURE_EDIT
+        MENUITEM SEPARATOR
+        MENUITEM "Cancella tutti", 			        ID_PROCEDURE_DELALL
+        MENUITEM SEPARATOR
+        MENUITEM "Vai...", 					        ID_PROCEDURE_GO
+        MENUITEM SEPARATOR
+        MENUITEM "Messaggi", 					        ID_PROCEDURE_MESSAGE
+        END
+END
+
+IDR_MESSAGELIST MENU
+BEGIN
+    POPUP ""
+        BEGIN
+        MENUITEM "Cancella lista", 					ID_MESSAGE_CLEARLIST
+        MENUITEM "Cancella i selezionati", 	        ID_MESSAGE_DELETESELECTED
+        MENUITEM SEPARATOR
+        MENUITEM "Copia indirizzo",                    ID_MESSAGE_COPY
+        MENUITEM "Vai....",                            ID_MESSAGE_GO
+        MENUITEM "Passa a Breakpoint", 				ID_MESSAGE_TOBREAKPOINT
+        MENUITEM SEPARATOR
+        MENUITEM "Seleziona Tutti", 					ID_MESSAGE_SELECTALL
+        MENUITEM "Deseleziona Tutti", 					ID_MESSAGE_DESELECTALL
+        MENUITEM "Cerca...",                           ID_MESSAGE_FIND
+        END
+END
+
+#endif
+
+IDR_BREAKPOINT MENU
+BEGIN
+    POPUP ""
+       BEGIN
+       MENUITEM " ", 							        ID_BREAKPOINT_DEL
+       MENUITEM " ", 						            ID_BREAKPOINT_DELALL
+       MENUITEM " ", 								    ID_BREAKPOINT_COPY
+       MENUITEM SEPARATOR
+       MENUITEM " ", 								    ID_BREAKPOINT_GO
+#ifdef _DEBPRO
+       MENUITEM SEPARATOR
+       MENUITEM "Disabilta", 					        ID_BREAKPOINT_DISABLE
+       MENUITEM "Disabilta Tutti", 				    ID_BREAKPOINT_DISABLEALL
+       MENUITEM SEPARATOR
+       MENUITEM "Condizione", 						    ID_BREAKPOINT_CONDITON
+#endif
+       END
+END
+
+IDR_DEBUG MENU
+BEGIN
+   POPUP " "
+       BEGIN
+           MENUITEM " ",                        		ID_DEBUG_GO
+           MENUITEM " ",                     		    ID_DEBUG_PAUSE,      GRAYED
+           MENUITEM " ",         		                ID_DEBUG_BREAKPOINT
+           MENUITEM " ",                   		    ID_DEBUG_DIS1,       GRAYED
+           MENUITEM " ",                		        ID_DEBUG_DIS2,       GRAYED
+           MENUITEM " ",             		            ID_DEBUG_DIS4,       GRAYED
+           MENUITEM " ",                               ID_DEBUG_RESTART,    GRAYED
+           MENUITEM " ",                               ID_DEBUG_STOP,       GRAYED
+           MENUITEM SEPARATOR
+           POPUP " "
+               BEGIN
+                   MENUITEM " ", 						ID_DEBUG_WRITEFILE_START
+                   MENUITEM " ", 						ID_DEBUG_WRITEFILE_PAUSE, GRAYED
+                   MENUITEM " ", 						ID_DEBUG_WRITEFILE_RESUME, GRAYED
+                   MENUITEM " ", 						ID_DEBUG_WRITEFILE_STOP, GRAYED
+#ifdef _DEBPRO
+                   MENUITEM "Disassembla su file",     ID_DEBUG_WRITEFILE_ALL
+#endif
+               END
+           MENUITEM SEPARATOR
+           MENUITEM " ", 	ID_DEBUG_LOAD
+           MENUITEM " ", 	ID_DEBUG_SAVE
+           MENUITEM SEPARATOR
+           POPUP " "
+               BEGIN
+                   MENUITEM " ", 						ID_DEBUG_RECENT, GRAYED
+               END
+#ifdef _DEBPRO
+           MENUITEM "&Message\tF2",                   	ID_DEBUG_MESSAGE
+           MENUITEM SEPARATOR
+           MENUITEM "Break on Software Interrupt", 	ID_DEBUG_ENETER_SWI
+           POPUP "Break on Enter IRQ"
+               BEGIN
+                   MENUITEM "&General IRQ",			ID_DEBUG_IRQE
+                   MENUITEM SEPARATOR
+                   MENUITEM "IRQ &VBLANK", 			ID_DEBUG_IRQE1
+                   MENUITEM "IRQ &HBLANK", 			ID_DEBUG_IRQE2
+                   MENUITEM "IRQ V&COUNT", 			ID_DEBUG_IRQE3
+                   MENUITEM SEPARATOR
+                   MENUITEM "IRQ TIMER&0", 			ID_DEBUG_IRQE4
+                   MENUITEM "IRQ TIMER&1", 			ID_DEBUG_IRQE5
+                   MENUITEM "IRQ TIMER&2", 			ID_DEBUG_IRQE6
+                   MENUITEM "IRQ TIMER&3", 			ID_DEBUG_IRQE7
+                   MENUITEM SEPARATOR
+                   MENUITEM "IRQ SIO", 				ID_DEBUG_IRQE8
+                   MENUITEM SEPARATOR
+                   MENUITEM "IRQ DMA0", 				ID_DEBUG_IRQE9
+                   MENUITEM "IRQ DMA1", 				ID_DEBUG_IRQE10
+                   MENUITEM "IRQ DMA2", 				ID_DEBUG_IRQE11
+                   MENUITEM "IRQ DMA3", 				ID_DEBUG_IRQE12
+               END
+           POPUP "Break on Exit IRQ"
+               BEGIN
+                   MENUITEM "&General IRQ",			ID_DEBUG_IRQX
+                   MENUITEM SEPARATOR
+                   MENUITEM "IRQ &VBLANK", 			ID_DEBUG_IRQX1
+                   MENUITEM "IRQ &HBLANK", 			ID_DEBUG_IRQX2
+                   MENUITEM "IRQ V&COUNT", 			ID_DEBUG_IRQX3
+                   MENUITEM SEPARATOR
+                   MENUITEM "IRQ TIMER&0", 			ID_DEBUG_IRQX4
+                   MENUITEM "IRQ TIMER&1", 			ID_DEBUG_IRQX5
+                   MENUITEM "IRQ TIMER&2", 			ID_DEBUG_IRQX6
+                   MENUITEM "IRQ TIMER&3", 			ID_DEBUG_IRQX7
+                   MENUITEM SEPARATOR
+                   MENUITEM "IRQ DMA0", 				ID_DEBUG_IRQX8
+                   MENUITEM "IRQ DMA1", 				ID_DEBUG_IRQX9
+                   MENUITEM "IRQ DMA2", 				ID_DEBUG_IRQX10
+                   MENUITEM "IRQ DMA3", 				ID_DEBUG_IRQX11
+               END
+           POPUP "Break on Start DMA"
+               BEGIN
+                   MENUITEM "General DMA", 			ID_DEBUG_START_DMA
+               END
+#endif
+       END
+   POPUP " "
+       BEGIN
+           MENUITEM " ",                    			ID_DEBUG_DIS3
+#ifdef DEBPRO
+           MENUITEM "&Subroutine",                		ID_DEBUG_PROCEDURE
+#endif
+           MENUITEM SEPARATOR
+           MENUITEM " ",    			                ID_DEBUG_REDRAW
+           MENUITEM SEPARATOR
+           MENUITEM " ", 			                    ID_DEBUG_PALBG
+           MENUITEM " ",     			                ID_DEBUG_PALOBJ
+#ifdef _DEBPRO
+           MENUITEM SEPARATOR
+           MENUITEM "&Object Window",      			ID_DEBUG_SPRITE
+           MENUITEM "Bac&kground Window",              ID_DEBUG_BACKGROUND
+           MENUITEM SEPARATOR
+           MENUITEM "&DMA Register",              	    ID_DEBUG_DMA
+           MENUITEM "Source Window",                   ID_DEBUG_SOURCE
+           MENUITEM SEPARATOR
+           MENUITEM "Memory Breakpoint Window",        ID_DEBUG_BKMEMORY
+#endif
+       END
+#ifdef _DEBPRO
+   POPUP "&Message" GRAYED
+       BEGIN
+           MENUITEM "&Interrupt",                 		ID_MESSAGE_IRQ
+           POPUP "&DMA"
+               BEGIN
+                   MENUITEM "Tutti",                   ID_MESSAGE_DMA
+                   MENUITEM SEPARATOR
+           MENUITEM "Canale 0",                        ID_MESSAGE_DMA0
+           MENUITEM "Canale 1",                        	ID_MESSAGE_DMA1
+           MENUITEM "Canale 2",                        	ID_MESSAGE_DMA2
+           MENUITEM "Canale 3",                        	ID_MESSAGE_DMA3
+        END
+        MENUITEM "&Software Interrupt",        			ID_MESSAGE_SWI
+        MENUITEM "&Software Interrupt 5",      			ID_MESSAGE_SWI5
+        MENUITEM "&Power",                     			ID_MESSAGE_POWER
+        MENUITEM "&Timer",                     			ID_MESSAGE_TIMER
+        MENUITEM "&CPU Mode",                  			ID_MESSAGE_CPU
+        MENUITEM "Exceptions",                             ID_MESSAGE_EXCEPTIONS
+        MENUITEM "Stack",                                  ID_MESSAGE_STACK
+        MENUITEM SEPARATOR
+        MENUITEM "Clear Message List",         			ID_MESSAGE_CLEARLIST
+    END
+#endif
+END
+
+IDD_DIALOG16 DIALOGEX 6, 18, 242, 112
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Lista Cheat"
+FONT 8, "Arial"
+BEGIN
+   CONTROL         "", IDC_LIST1, "SysListView32", WS_TABSTOP|LVS_NOSORTHEADER|WS_VISIBLE|WS_BORDER|LVS_REPORT|LVS_SINGLESEL|LVS_SHOWSELALWAYS, 6, 3, 229, 80
+   PUSHBUTTON      "Chiudi", IDOK, 184, 86, 51, 12,WS_TABSTOP
+END
+
+IDD_DIALOG13 DIALOGEX 281, 82, 180, 100
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU | DS_CENTER
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION ""
+FONT 8, "Arial"
+BEGIN
+    DEFPUSHBUTTON  "OK", IDOK, 80, 85, 45, 12
+    PUSHBUTTON     "Cancel", IDCANCEL, 130, 85, 45, 12
+    PUSHBUTTON     "Reset", IDC_BUTTON3, 6, 85, 45, 12
+    GROUPBOX    "", IDC_STATIC, 6, 3, 169, 77, 0
+    PUSHBUTTON  "", IDC_BUTTON_L, 17, 14, 40, 12,BS_PUSHLIKE|BS_AUTOCHECKBOX|WS_GROUP|WS_TABSTOP
+    PUSHBUTTON  "", IDC_BUTTON_R, 123, 14, 40, 12,BS_PUSHLIKE|BS_AUTOCHECKBOX|WS_GROUP|WS_TABSTOP
+    PUSHBUTTON  "", IDC_BUTTON_START, 17, 30, 40, 12,BS_PUSHLIKE|BS_AUTOCHECKBOX|WS_GROUP|WS_TABSTOP
+    PUSHBUTTON  "", IDC_BUTTON_SELECT, 17, 46, 40, 12,BS_PUSHLIKE|BS_AUTOCHECKBOX|WS_GROUP|WS_TABSTOP
+    PUSHBUTTON  "", IDC_BUTTON_A, 123, 30, 40, 12,BS_PUSHLIKE|BS_AUTOCHECKBOX|WS_GROUP|WS_TABSTOP
+    PUSHBUTTON  "", IDC_BUTTON_B, 123, 46, 40, 12,BS_PUSHLIKE|BS_AUTOCHECKBOX|WS_GROUP|WS_TABSTOP
+    PUSHBUTTON  "", IDC_BUTTON_UP, 82, 17, 15, 12, BS_BITMAP|BS_PUSHLIKE|BS_AUTOCHECKBOX|WS_GROUP|WS_TABSTOP
+    PUSHBUTTON  "", IDC_BUTTON_DOWN, 82, 41, 15, 12, BS_BITMAP|BS_PUSHLIKE|BS_AUTOCHECKBOX|WS_GROUP|WS_TABSTOP
+    PUSHBUTTON  "", IDC_BUTTON_RIGHT, 97, 29, 15, 12, BS_BITMAP|BS_PUSHLIKE|BS_AUTOCHECKBOX|WS_GROUP|WS_TABSTOP
+    PUSHBUTTON  "", IDC_BUTTON_LEFT, 67, 29, 15, 12, BS_BITMAP|BS_PUSHLIKE|BS_AUTOCHECKBOX|WS_GROUP|WS_TABSTOP
+    EDITTEXT    IDC_EDIT1, 57, 64, 65, 11, ES_CENTER|WS_EX_CLIENTEDGE
+END
+
+IDD_DIALOG1 DIALOGEX 0, 0, 292, 265
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU	
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION ""
+FONT 8, "Arial"
+MENU IDR_DEBUG
+BEGIN
+    EDITTEXT        IDC_EDIT2, 116, 22, 62, 12, ES_AUTOHSCROLL|WS_CHILD
+    DEFPUSHBUTTON   "", IDC_BUTTON1, 181, 22, 45, 12,WS_CHILD
+    COMBOBOX        IDC_COMBOBOX3, 229, 22, 59, 90, CBS_DROPDOWNLIST | CBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP|WS_CHILD
+    COMBOBOX        IDC_COMBOBOX2, 2, 22, 112, 90, CBS_DROPDOWNLIST | CBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP|WS_CHILD
+    LISTBOX         IDC_LIST1, 2, 37, 212, 125, LBS_OWNERDRAWFIXED | LBS_HASSTRINGS | LBS_NOINTEGRALHEIGHT | LBS_DISABLENOSCROLL | WS_TABSTOP|WS_CHILD | NOT WS_BORDER
+    SCROLLBAR       IDC_VSBDIS, 214, 37, 11, 125, SBS_VERT|WS_CHILD|WS_CLIPSIBLINGS
+    LISTBOX         ID_DEBUG_DIS, 228, 37, 60, 125, LBS_NOINTEGRALHEIGHT|LBS_NOSEL|WS_CHILD
+    LTEXT           "Breakpoint :", IDC_STATIC, 2, 168, 40, 10,WS_CHILD
+#ifdef _DEBPRO
+    CTEXT           "", IDC_RASTERLINE, 106, 165, 25, 12, WS_BORDER|WS_CHILD
+    CTEXT           "", IDC_CYCLE, 134, 165, 25, 12, WS_BORDER|WS_CHILD
+    LTEXT           "", IDC_IRQRET, 162, 165, 25, 12, WS_BORDER|WS_CHILD
+    LTEXT           "", IDC_MODE, 190, 165, 35, 12, WS_BORDER|WS_CHILD
+    COMBOBOX        IDC_COMBOBOX1, 43, 165, 60, 110, CBS_DROPDOWN | CBS_OWNERDRAWFIXED | WS_VSCROLL | WS_GROUP | WS_TABSTOP|WS_CHILD
+#else
+   CTEXT           "", IDC_RASTERLINE, 135, 165, 30, 12, WS_BORDER|WS_CHILD
+   LTEXT           "", IDC_MODE, 167, 165, 45, 12, WS_BORDER|WS_CHILD
+   COMBOBOX        IDC_COMBOBOX1, 43, 165, 90, 110, CBS_DROPDOWN | CBS_OWNERDRAWFIXED | WS_VSCROLL | WS_GROUP | WS_TABSTOP|WS_CHILD
+#endif
+   CHECKBOX        "", IDC_CHECK1, 228, 164, 10, 10,WS_TABSTOP|BS_AUTOCHECKBOX|WS_CHILD|BS_FLAT
+   CHECKBOX        "", IDC_CHECK2, 238, 164, 10, 10,WS_TABSTOP|BS_AUTOCHECKBOX|WS_CHILD|BS_FLAT
+   CHECKBOX        "", IDC_CHECK3, 248, 164, 10, 10,WS_TABSTOP|BS_AUTOCHECKBOX|WS_CHILD|BS_FLAT
+   CHECKBOX        "", IDC_CHECK4, 258, 164, 10, 10,WS_TABSTOP|BS_AUTOCHECKBOX|WS_CHILD|BS_FLAT
+   CHECKBOX        "", IDC_CHECK5, 268, 164, 10, 10,WS_TABSTOP|BS_AUTOCHECKBOX|WS_CHILD|WS_DISABLED|BS_FLAT
+   CHECKBOX        "", IDC_CHECK6, 278, 164, 10, 10,WS_TABSTOP|BS_AUTOCHECKBOX|WS_CHILD|WS_DISABLED|BS_FLAT
+   CTEXT           "N", IDC_STATIC, 228, 173, 10, 10, WS_CHILD
+   CTEXT           "C", IDC_STATIC, 238, 173, 10, 10, WS_CHILD
+   CTEXT           "V", IDC_STATIC, 248, 173, 10, 10, WS_CHILD
+   CTEXT           "Z", IDC_STATIC, 258, 173, 10, 10, WS_CHILD
+   CTEXT           "I", IDC_STATIC, 268, 173, 10, 10, WS_CHILD
+   CTEXT           "T", IDC_STATIC, 278, 173, 10, 10, WS_CHILD
+   LISTBOX         IDC_LIST3, 5, 194, 280, 49, LBS_MULTIPLESEL | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_GROUP | WS_TABSTOP | WS_VISIBLE|WS_CHILD
+   LISTBOX         IDC_LIST4, 5, 194, 280, 49, LBS_NOINTEGRALHEIGHT | NOT WS_VISIBLE | WS_VSCROLL | WS_GROUP | WS_TABSTOP | 0x2000|WS_CHILD
+   LISTBOX         IDC_LIST5, 5, 194, 280, 49, LBS_NOINTEGRALHEIGHT | NOT WS_VISIBLE | WS_VSCROLL | WS_GROUP | WS_TABSTOP | 0x2000|WS_CHILD
+   LISTBOX         IDC_LIST6, 5, 194, 280, 49, LBS_NOINTEGRALHEIGHT | NOT WS_VISIBLE | WS_VSCROLL | WS_GROUP | WS_TABSTOP | 0x2000|WS_CHILD
+   CONTROL         "", IDC_TAB1, "SysTabControl32", WS_CHILD, 2, 179, 287, 69
+END
+
+IDD_DIALOG3 DIALOGEX 0,220, 337, 160
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU|WS_CLIPCHILDREN
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION ""
+FONT 8, "Arial"
+MENU IDR_MEMORY
+BEGIN
+    CONTROL        "",IDC_EDIT1,"STATIC",SS_WHITERECT|WS_BORDER | SS_NOTIFY|WS_CHILD,3, 3, 320, 125
+    SCROLLBAR      IDC_VSBMEM, 322, 3, 11, 125, SBS_VERT|WS_CHILD
+    COMBOBOX       IDC_COMBOBOX2, 3, 133, 115, 85, CBS_DROPDOWNLIST | CBS_SORT | CBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP|WS_CHILD
+    COMBOBOX       IDC_EDIT2, 120, 133, 110, 85, CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP|WS_CHILD
+    DEFPUSHBUTTON  "", IDC_BUTTON1, 232, 133, 45, 13,WS_CHILD
+    COMBOBOX       IDC_COMBOBOX3, 279, 133, 55, 55, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP|WS_CHILD
+END
+
+IDD_DIALOG4 DIALOGEX 0, 0, 228, 200
+STYLE DS_MODALFRAME | DS_CENTER | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+IDD_DIALOG17 DIALOGEX 0, 0, 180, 215
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION ""
+FONT 8, "Arial"
+BEGIN
+   CONTROL         "",IDC_UPDIOREG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,5,196,120,12
+   LTEXT           "Val.",IDC_STATIC,125,198,15,8
+   RTEXT           "",26,140,196,35,12,WS_CHILD|WS_BORDER|SS_NOTIFY
+   RTEXT           "0",IDC_STATIC,2,3,12,8
+   CONTROL         "",10,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,3,150,8
+   RTEXT           "1",IDC_STATIC,2,16,12,8
+   CONTROL         "",11,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,15,150,8
+   RTEXT           "2",IDC_STATIC,2,27,12,8
+   CONTROL         "",12,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,27,150,8
+   RTEXT           "3",IDC_STATIC,2,39,12,8
+   CONTROL         "",13,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,39,150,8
+   RTEXT           "4",IDC_STATIC,2,51,12,8
+   CONTROL         "",14,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,51,150,8
+   RTEXT           "5",IDC_STATIC,2,63,12,8
+   CONTROL         "",15,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,63,150,8
+   RTEXT           "6",IDC_STATIC,2,75,12,8
+   CONTROL         "",16,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,75,150,8
+   RTEXT           "7",IDC_STATIC,2,87,12,8
+   CONTROL         "",17,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,87,150,8
+   RTEXT           "8",IDC_STATIC,2,99,12,8
+   CONTROL         "",18,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,99,150,8
+   RTEXT           "9",IDC_STATIC,2,111,12,8
+   CONTROL         "",19,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,111,150,8
+   RTEXT           "10",IDC_STATIC,2,123,12,8
+   CONTROL         "",20,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,123,150,8
+   RTEXT           "11",IDC_STATIC,2,135,12,8
+   CONTROL         "",21,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,135,150,8
+   RTEXT           "12",IDC_STATIC,2,147,12,8
+   CONTROL         "",22,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,147,150,8
+   RTEXT           "13",IDC_STATIC,2,159,12,8
+   CONTROL         "",23,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,159,150,8
+   RTEXT           "14",IDC_STATIC,2,171,12,8
+   CONTROL         "",24,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,171,150,8
+   RTEXT           "15",IDC_STATIC,2,183,12,8
+   CONTROL         "",25,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,183,150,8
+END
+
+#ifdef _DEBPRO
+IDR_BRKMEMORY MENU
+BEGIN
+   POPUP "&File"
+       BEGIN
+           MENUITEM "Nuovo",               ID_BRKMEM_NEW
+           MENUITEM "Cancella",            ID_BRKMEM_DELETE
+           MENUITEM "Cancella tutti",      ID_BRKMEM_DELETEALL
+           MENUITEM SEPARATOR
+           MENUITEM "Disabilita tutti",    ID_BRKMEM_DISABLEDALL
+       END
+
+END
+
+IDD_DIALOG11 DIALOGEX 0, 0, 270, 150
+STYLE DS_MODALFRAME | DS_CENTER | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU |WS_MINIMIZEBOX
+CAPTION "Memory Breakpoint Window"
+EXSTYLE WS_EX_TOOLWINDOW
+FONT 8, "Arial"
+MENU IDR_BRKMEMORY
+BEGIN
+    GROUPBOX        "Breakpoint", IDC_STATIC, 3, 3, 172, 128
+    PUSHBUTTON      "OK", IDOK, 88, 135, 45, 12
+    PUSHBUTTON      "Cancel", IDCANCEL, 136, 135, 45, 12
+    LTEXT           "Address :", IDC_STATIC, 10, 13, 39, 12, WS_TABSTOP
+    CONTROL         "", IDC_BREAKPOINTADRESS, WC_LISTVIEW, WS_CHILD|WS_VISIBLE|WS_BORDER|WS_CLIPCHILDREN|LVS_REPORT|LVS_NOSORTHEADER,10,22,150,105
+    GROUPBOX        "Check",  IDCANCEL, 178, 3, 89, 55
+    CHECKBOX        "Write",  IDC_RADIO1, 184, 15, 39, 10,NOT WS_TABSTOP|BS_AUTOCHECKBOX
+    CHECKBOX        "Read",   IDC_RADIO2, 184, 28, 39, 10,NOT WS_TABSTOP|BS_AUTOCHECKBOX
+    CHECKBOX        "Modify", IDC_RADIO3, 184, 41, 73, 10,NOT WS_TABSTOP|BS_AUTOCHECKBOX
+    GROUPBOX        "Access",  IDCANCEL, 178, 65, 89, 55
+    CHECKBOX        "Byte",  IDC_RADIO5, 184, 77, 39, 10,NOT WS_TABSTOP|BS_AUTOCHECKBOX
+    CHECKBOX        "Half Word", IDC_RADIO6, 184, 90, 60, 10,NOT WS_TABSTOP|BS_AUTOCHECKBOX
+    CHECKBOX        "Word", IDC_RADIO7, 184, 103, 73, 10,NOT WS_TABSTOP|BS_AUTOCHECKBOX
+    CHECKBOX        "Break on true", IDC_RADIO4, 184, 120, 73, 10,NOT WS_TABSTOP|BS_AUTOCHECKBOX
+END
+
+IDD_DIALOG10 DIALOGEX 0, 0, 440, 280
+STYLE DS_MODALFRAME | DS_CENTER | WS_MAXIMIZEBOX | WS_VISIBLE | WS_CAPTION | WS_SYSMENU |WS_MINIMIZEBOX |WS_THICKFRAME
+CAPTION "Source Window"
+FONT 8, "Arial"
+MENU IDR_DEBUG
+BEGIN
+   CONTROL         "", IDC_TAB1, WC_TABCONTROL, WS_CHILD|WS_VISIBLE|WS_CLIPCHILDREN, 2, 2, 336, 196
+   CONTROL         "", IDM_STATUSBAR,STATUSCLASSNAME, WS_CHILD|WS_VISIBLE|WS_BORDER|CCS_BOTTOM,0,0,0,0
+   CONTROL         "", IDM_TOOLBAR,TOOLBARCLASSNAME, WS_CHILD|WS_VISIBLE|WS_BORDER|CCS_TOP|0x900,0,0,0,0
+END
+
+IDD_DIALOG5 DIALOGEX 0, 0, 240, 78
+STYLE DS_MODALFRAME | DS_CENTER | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "DMA Register"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Destination", IDC_STATIC, 23, 3, 65, 10
+    LTEXT           "Source", IDC_STATIC, 75, 3, 45, 10
+    LTEXT           "Rep.", IDC_STATIC, 130, 3, 15, 10
+    LTEXT           "Rel.", IDC_STATIC, 155, 3, 15, 10
+    LTEXT           "Mode", IDC_STATIC, 175, 3, 25, 10
+    LTEXT           "Att.", IDC_STATIC, 205, 3, 25, 10
+    LTEXT           "IRQ", IDC_STATIC, 223, 3, 25, 10
+    LTEXT           "", IDC_DMA0DAD, 23, 15, 50, 12, WS_BORDER
+    LTEXT           "", IDC_DMA1DAD, 23, 30, 50, 12, WS_BORDER
+    LTEXT           "", IDC_DMA2DAD, 23, 45, 50, 12, WS_BORDER
+    LTEXT           "", IDC_DMA3DAD, 23, 60, 50, 12, WS_BORDER
+    LTEXT           "", IDC_DMA0SAD, 75, 15, 50, 12, WS_BORDER
+    LTEXT           "", IDC_DMA1SAD, 75, 30, 50, 12, WS_BORDER
+    LTEXT           "", IDC_DMA2SAD, 75, 45, 50, 12, WS_BORDER
+    LTEXT           "", IDC_DMA3SAD, 75, 60, 50, 12, WS_BORDER
+    CHECKBOX        "", IDC_CHK0RP, 130, 17, 15, 10, NOT WS_TABSTOP
+    CHECKBOX        "", IDC_CHK0RL, 155, 17, 15, 10, NOT WS_TABSTOP
+    CHECKBOX        "", IDC_CHK1RP, 130, 32, 15, 10, NOT WS_TABSTOP
+    CHECKBOX        "", IDC_CHK1RL, 155, 32, 15, 10, NOT WS_TABSTOP
+    CHECKBOX        "", IDC_CHK2RP, 130, 47, 15, 10, NOT WS_TABSTOP
+    CHECKBOX        "", IDC_CHK2RL, 155, 47, 15, 10, NOT WS_TABSTOP
+    CHECKBOX        "", IDC_CHK3RP, 130, 62, 15, 10, NOT WS_TABSTOP
+    CHECKBOX        "", IDC_CHK3RL, 155, 62, 15, 10, NOT WS_TABSTOP
+    LTEXT           "", IDC_DMA0START, 175, 15, 25, 12, WS_BORDER
+    LTEXT           "", IDC_DMA1START, 175, 30, 25, 12, WS_BORDER
+    LTEXT           "", IDC_DMA2START, 175, 45, 25, 12, WS_BORDER
+    LTEXT           "", IDC_DMA3START, 175, 60, 25, 12, WS_BORDER
+    CTEXT           "0", IDC_STATIC, 3, 17, 20, 12
+    CTEXT           "1", IDC_STATIC, 3, 32, 20, 12
+    CTEXT           "2", IDC_STATIC, 3, 47, 20, 12
+    CTEXT           "3", IDC_STATIC, 3, 62, 20, 12
+    CHECKBOX        "", IDC_CHK0E, 205, 17, 15, 10, NOT WS_TABSTOP
+    CHECKBOX        "", IDC_CHK1E, 205, 32, 15, 10, NOT WS_TABSTOP
+    CHECKBOX        "", IDC_CHK2E, 205, 47, 15, 10, NOT WS_TABSTOP
+    CHECKBOX        "", IDC_CHK3E, 205, 62, 15, 10, NOT WS_TABSTOP
+    CHECKBOX        "", IDC_CHK0I, 223, 17, 15, 10, NOT WS_TABSTOP
+    CHECKBOX        "", IDC_CHK1I, 223, 32, 15, 10, NOT WS_TABSTOP
+    CHECKBOX        "", IDC_CHK2I, 223, 47, 15, 10, NOT WS_TABSTOP
+    CHECKBOX        "", IDC_CHK3I, 223, 62, 15, 10, NOT WS_TABSTOP
+END
+
+IDD_DIALOG6 DIALOGEX 0, 0, 269, 96
+STYLE DS_MODALFRAME | DS_CENTER | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Proprieta' Breakpoint"
+FONT 8, "Arial"
+BEGIN
+    GROUPBOX        "Breakpoint", IDC_STATIC, 3, 3, 172, 59
+    DEFPUSHBUTTON   "OK", IDOK, 47, 80, 45, 12
+    PUSHBUTTON      "Cancel", IDCANCEL, 95, 80, 45, 12
+    LTEXT           "Address :", IDC_STATIC, 10, 14, 39, 12, WS_TABSTOP
+    LTEXT           "", IDC_BREAKPOINTADRESS, 49, 13, 65, 12, WS_BORDER | WS_TABSTOP
+    LTEXT           "Count :", IDC_STATIC, 10, 29, 30, 12
+    EDITTEXT        IDC_EDIT2, 49, 29, 40, 12, ES_RIGHT | ES_NUMBER
+    LTEXT           "Condition  :", IDC_STATIC, 10, 46, 41, 10
+    GROUPBOX        "Condition", IDCANCEL, 178, 3, 89, 91
+    AUTORADIOBUTTON "Uguale", IDC_RADIO1, 184, 15, 39, 10,BS_AUTORADIOBUTTON
+    AUTORADIOBUTTON "Diverso", IDC_RADIO2, 184, 28, 39, 10,BS_AUTORADIOBUTTON
+    AUTORADIOBUTTON "Maggiore", IDC_RADIO3, 184, 41, 73, 10,BS_AUTORADIOBUTTON
+    AUTORADIOBUTTON "Maggiore o Uguale", IDC_RADIO4, 184, 54, 73, 10,BS_AUTORADIOBUTTON
+    AUTORADIOBUTTON "Minore", IDC_RADIO5, 184, 67, 69, 10,BS_AUTORADIOBUTTON
+    AUTORADIOBUTTON "Minore o Uguale", IDC_RADIO6, 184, 80, 72, 10,BS_AUTORADIOBUTTON
+    COMBOBOX        IDC_COMBOBOX1, 49, 45, 60, 80, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBOBOX2, 112, 45, 60, 80, CBS_DROPDOWN | CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP | 0x0008
+END
+
+IDD_DIALOG8 DIALOGEX 6, 18, 190, 147
+STYLE WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Sprite"
+FONT 8, "Arial"
+BEGIN
+   LTEXT           "Sprite :", IDC_STATIC , 8, 12, 30, 10
+   EDITTEXT        IDC_EDIT1, 8, 21, 61, 12, ES_NUMBER|ES_RIGHT
+   CONTROL         "", IDC_SPIN1, "msctls_updown32", UDS_ALIGNRIGHT|UDS_AUTOBUDDY|UDS_SETBUDDYINT|UDS_ARROWKEYS|UDS_WRAP|UDS_NOTHOUSANDS, 61, 18, 22, 10
+   CONTROL         "", IDC_TRACK1, TRACKBAR_CLASS, TBS_HORZ|TBS_AUTOTICKS|TBS_BOTTOM, 61, 18, 70, 10
+   LTEXT           "", IDC_SPRITE, 88, 20, 64, 64, WS_BORDER | WS_GROUP
+   SCROLLBAR       IDC_VSBSPR, 170, 20, 11, 64, SBS_VERT|NOT WS_VISIBLE
+   SCROLLBAR       IDC_HSBSPR, 170, 20, 64, 11, SBS_HORZ|NOT WS_VISIBLE
+   LTEXT           "Abilitato :", IDC_SPRITE_ENA, 8, 40, 42, 9
+   LTEXT           "Priorita' :", IDC_SPRITE_PRI, 8, 49, 42, 9
+   LTEXT           "Posizione :", IDC_SPRITE_POS, 8, 58, 42, 9
+   LTEXT           "Colori    :", IDC_SPRITE_COL, 8, 67, 42, 9
+   LTEXT           "Palette   :", IDC_SPRITE_PAL, 8, 76, 42, 9
+   LTEXT           "Grandezza :", IDC_SPRITE_SIZ, 8, 85, 42, 9
+   LTEXT           "Rotazione :", IDC_SPRITE_ROT, 8, 94, 42, 9
+   LTEXT           "Attributo 0 :", IDC_SPRITE_ATTR0, 8, 103, 42, 9
+   LTEXT           "Attributo 1 :", IDC_SPRITE_ATTR1, 8, 111, 42, 9
+   LTEXT           "Attributo 2 :", IDC_SPRITE_ATTR2, 8, 120, 42, 9
+  	PUSHBUTTON      "Salva", IDC_BUTTON2, 25, 132, 40, 11
+   PUSHBUTTON      "Aggiorna", IDCANCEL, 75, 132, 40, 11
+   PUSHBUTTON      "Chiudi", IDOK, 125, 132, 40, 11
+END
+
+IDD_DIALOG9 DIALOGEX 149, 66, 300, 196
+STYLE  WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Background"
+FONT 8, "Arial"
+BEGIN
+   LTEXT           "", IDC_SPRITE, 10, 15, 225, 145, WS_BORDER | NOT WS_GROUP
+   SCROLLBAR       IDC_HSBBKG, 15, 160, 226, 10, WS_DISABLED| NOT WS_VISIBLE
+   SCROLLBAR       IDC_VSBBKG, 240, 15, 11, 145, SBS_VERT |WS_DISABLED|NOT WS_VISIBLE
+   LTEXT           "Modalita' :", IDC_STATIC, 200, 4, 70, 10, NOT WS_GROUP
+   COMBOBOX        IDC_COMBOBOX1, 200, 14, 90, 80, CBS_DROPDOWNLIST | CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP | CBS_NOINTEGRALHEIGHT
+   LTEXT           "Modalita' disegno :", IDC_STATIC, 200, 30,60, 12, NOT WS_GROUP
+   LTEXT           "", IDC_DRAWMODE, 270,30,40, 12, NOT WS_GROUP
+   GROUPBOX        "Frame", IDC_STATIC, 200, 54, 79, 46
+   AUTORADIOBUTTON "Frame 0", IDC_RADIO1, 206, 71, 39, 10, WS_DISABLED | BS_AUTORADIOBUTTON
+   AUTORADIOBUTTON "Frame 1", IDC_RADIO2, 206, 84, 39, 10, WS_DISABLED | BS_AUTORADIOBUTTON
+   GROUPBOX        "Background", IDC_STATIC, 200, 104, 78, 61
+   AUTORADIOBUTTON "Layer 0", IDC_RADIO3, 206, 117, 39, 10, WS_DISABLED | BS_AUTORADIOBUTTON
+   AUTORADIOBUTTON "Layer 1", IDC_RADIO4, 206, 127, 39, 10, WS_DISABLED | BS_AUTORADIOBUTTON
+   AUTORADIOBUTTON "Layer 2", IDC_RADIO5, 206, 137, 39, 10, WS_DISABLED | BS_AUTORADIOBUTTON
+   AUTORADIOBUTTON "Layer 3", IDC_RADIO6, 206, 147, 39, 10, WS_DISABLED | BS_AUTORADIOBUTTON
+   GROUPBOX        "Char Base Black", IDC_STATIC, 10, 120, 108, 61
+   AUTORADIOBUTTON "Char Base Block 0", IDC_RADIO7, 16, 133, 79, 10, BS_AUTORADIOBUTTON
+   AUTORADIOBUTTON "Char Base Block 1", IDC_RADIO8, 16, 143, 79, 10, BS_AUTORADIOBUTTON
+   AUTORADIOBUTTON "Char Base Block 2", IDC_RADIO9, 16, 153, 79, 10, BS_AUTORADIOBUTTON
+   AUTORADIOBUTTON "Char Base Block 3", IDC_RADIO10, 16, 163, 79, 10, BS_AUTORADIOBUTTON
+   PUSHBUTTON      "Aggiorna", IDC_BUTTON2, 200, 178, 40, 12
+   PUSHBUTTON      "Chiudi", IDOK, 248, 178, 40, 12
+END
+
+#endif
+
+IDI_TOOLBAR_DEBUG  BITMAP  DISCARDABLE "bmp\\toolbardebug.bmp"
+IDI_TOOLBARD_DEBUG BITMAP  DISCARDABLE "bmp\\toolbardebugd.bmp"
+IDI_PICKER         CURSOR  "bmp\\picker.cur"
+                                                             
+#endif
+
+IDD_DIALOG2 DIALOGEX 0, 0, 180, 75
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Info..."
+FONT 8, "Arial"
+BEGIN
+   CONTROL         " ", IDC_LOGO, "STATIC", 0x000d|SS_NOTIFY|WS_BORDER|WS_DISABLED, 5, 2,170,60
+   CONTROL         "http://www.rascalboy.nzone.it",IDC_LINK,"RBALINKCONTROL",WS_VISIBLE|0x800,40, 63, 100,9
+END
+
+
+
+IDD_DIALOG14 DIALOG 0, 0, 180, 175
+STYLE DS_CENTER | DS_CONTROL | WS_VISIBLE | WS_CAPTION | DS_3DLOOK
+CAPTION ""
+FONT 8, "Arial"
+BEGIN
+	LTEXT           "Sistema", IDC_STATIC, 2, 2,28,10,WS_CHILD|WS_VISIBLE
+   CONTROL         "", IDC_STATIC,"STATIC",WS_CHILD|SS_ETCHEDHORZ,31,7,40, 1
+   CONTROL         "",IDC_LOGO, "STATIC", WS_CHILD|WS_BORDER|SS_OWNERDRAW,76, 7,130,40
+	CONTROL         "http://www.rascalboy.nzone.it", IDC_LINK,"RBALINKCONTROL",SS_LEFT, 90, 48, 100,10
+   LTEXT           "CPU :",IDC_STATIC,5,15,60,10,WS_CHILD|SS_SIMPLE
+   LTEXT           "",IDC_CPU,7,26,60,10,WS_CHILD|SS_SIMPLE
+   LTEXT           "Memoria :",IDC_STATIC,5,37,60,10,WS_CHILD|SS_SIMPLE
+   LTEXT           "",IDC_MEM,7,48,60,10,WS_CHILD|SS_SIMPLE
+	LTEXT           "Plugin", IDC_STATIC, 5, 75, 30,10,WS_CHILD|WS_VISIBLE
+   CONTROL         "", IDC_STATIC,"STATIC",WS_CHILD|SS_ETCHEDHORZ,30,79,177, 1
+   PUSHBUTTON      "", IDC_RELOAD, 155, 62, 50, 12
+   CONTROL         "", IDC_LIST1, "SysListView32", WS_CHILD|WS_VISIBLE|WS_BORDER|WS_CLIPCHILDREN|LVS_REPORT|LVS_NOSORTHEADER|LVS_SINGLESEL,5,85,202,72
+END                             
+
+IDD_DIALOG15 DIALOG 0, 0, 180, 175
+STYLE DS_CENTER | DS_CONTROL | WS_VISIBLE | WS_CAPTION | DS_3DLOOK
+CAPTION ""
+FONT 8, "Arial"
+BEGIN
+	GROUPBOX        "Registra stato gioco", IDC_STATIC, 1, 1,207,60
+   LTEXT           "Memoria :",IDC_STATIC,7,20,35,10,WS_CHILD|SS_SIMPLE
+   CONTROL         "", IDC_TRACK1,"msctls_trackbar32",WS_CHILD|WS_VISIBLE|TBS_HORZ|TBS_BOTTOM|TBS_AUTOTICKS|0x100,47,20,90,10
+   CTEXT           "",IDC_EDIT1,140,20,35,10,WS_CHILD|WS_BORDER
+   LTEXT           "Intervallo :",IDC_STATIC,7,41,35,10,WS_CHILD|SS_SIMPLE
+   CONTROL         "", IDC_TRACK2,"msctls_trackbar32",WS_CHILD|WS_VISIBLE|TBS_HORZ|TBS_BOTTOM|TBS_AUTOTICKS|0x100,47,38,90,10
+   CTEXT           "",IDC_EDIT2,140,39,35,10,WS_CHILD|WS_BORDER
+   GROUPBOX        "Priorita'", IDC_STATIC, 1, 61,100,55
+   AUTORADIOBUTTON "", IDC_RADIO11, 7, 70, 60, 10,BS_AUTORADIOBUTTON|WS_GROUP
+   AUTORADIOBUTTON "", IDC_RADIO12, 7, 81, 60, 10,BS_AUTORADIOBUTTON
+   AUTORADIOBUTTON "", IDC_RADIO13, 7, 92, 60, 10,BS_AUTORADIOBUTTON
+   AUTORADIOBUTTON "", IDC_RADIO14, 7, 103, 60, 10,BS_AUTORADIOBUTTON
+   GROUPBOX        "Files associati", IDC_STATIC, 108, 61,100,55
+   CHECKBOX        ".gba",         IDC_CHECK1, 114, 73, 39, 10,WS_TABSTOP|BS_AUTOCHECKBOX
+   CHECKBOX        ".agb",         IDC_CHECK2, 114, 85, 39, 10,WS_TABSTOP|BS_AUTOCHECKBOX
+   CHECKBOX        ".bin",         IDC_CHECK3, 114, 97, 73, 10,WS_TABSTOP|BS_AUTOCHECKBOX
+// GROUPBOX        "IPS Patch", IDC_STATIC, 1, 117,207,30
+// CHECKBOX        "Visualizza dialog di scelta IPS file", IDC_CHECK4, 7, 129,150, 10, WS_TABSTOP|BS_AUTOCHECKBOX
+   GROUPBOX        "Acquisizione", IDC_STATIC, 1, 117,207,30
+   AUTORADIOBUTTON "Bitmap (BMP)", IDC_RADIO15, 7, 129, 60, 10,BS_AUTORADIOBUTTON|WS_GROUP
+   AUTORADIOBUTTON "Portable Network Graphics (PNG)", IDC_RADIO16, 80, 129, 120, 10,BS_AUTORADIOBUTTON
+END
+
+IDD_DIALOG12 DIALOG 0,0, 320, 7
+STYLE DS_CONTROL | WS_CLIPSIBLINGS | WS_CHILD | WS_VISIBLE | DS_3DLOOK
+FONT 8, "MS Sans Serif"
+BEGIN
+   CONTROL         "",IDC_WMA, "Button",WS_CHILD|BS_AUTOCHECKBOX, 0,0,310,12
+END
+
+
+IDI_LOGO           BITMAP  "bmp\\about1.bmp"
+IDI_ICON1          ICON    "bmp\\rascalboy.ico"
+IDI_WINXP          24      "rascal.app"
+IDI_BUTTON_RIGHT   BITMAP DISCARDABLE "bmp\\right.bmp"
+IDI_BUTTON_LEFT    BITMAP DISCARDABLE "bmp\\left.bmp"
+IDI_BUTTON_UP      BITMAP DISCARDABLE "bmp\\up.bmp"
+IDI_BUTTON_DOWN    BITMAP DISCARDABLE "bmp\\down.bmp"
+IDI_INFO_REG       RCDATA DISCARDABLE "io.zip"
+
+VS_VERSION_INFO VERSIONINFO
+   FILEVERSION     1,3,0,0
+ 	PRODUCTVERSION  1,3,0,0
+ 	FILEFLAGSMASK   0x3fL
+ 	FILEFLAGS       0x0L
+ 	FILEOS          0x4L
+ 	FILETYPE        0x1L
+ 	FILESUBTYPE     0x0L
+	BEGIN
+    	BLOCK "StringFileInfo"
+    	BEGIN
+        	BLOCK "041004e4"
+        	BEGIN
+               VALUE "Comments","Emulator Author - Lino Maglione, Web and Program Translator - Luca Antignano, Graphics Design - Marco Lago\0"
+            	VALUE "CompanyName", "Lino Maglione\0"
+            	VALUE "FileDescription", "RascalBoy Advance\0"
+            	VALUE "FileVersion", "1.3.0.0\0"
+            	VALUE "InternalName", "RascalBoy.exe\0"
+            	VALUE "LegalCopyright", "Copyright (C) 2003-2005\0"
+            	VALUE "OriginalFilename", "RascalBoy.exe\0"
+            	VALUE "ProductName", "RascalBoy Advance\0"
+            	VALUE "ProductVersion", "1.3.0.0\0"
+        	END
+    	END
+    	BLOCK "VarFileInfo"
+    	BEGIN
+        	VALUE "Translation", 0x410, 0x4e4
+    	END
+	END
+
+
